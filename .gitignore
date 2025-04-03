@@ -1,0 +1,19 @@
+# Ignore Terraform files and directories
+.terraform/
+*.tfstate
+*.tfstate.*
+.terraform.lock.hcl
+
+# Ignore provider binaries (for AWS or others)
+**/terraform-provider-*
+**/*.zip
+
+# Ignore local override files
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# Ignore IDE-specific files
+.idea/
+.vscode/
