@@ -1,4 +1,4 @@
-resource "aws_instance" "private-server" {
+resource "aws_instance" "private-servers" {
   # count = length(var.private_cird_block)
   count                  = var.environment == "Prod" ? 3 : 1
   ami                    = lookup(var.amis, var.aws_region)
@@ -6,6 +6,7 @@ resource "aws_instance" "private-server" {
   key_name               = var.key_name
   subnet_id              = element(var.private_subnets, count.index)
   vpc_security_group_ids = [var.sg_id]
+  iam_instance_profile = var.iam_instance_profile
   # associate_public_ip_address = true	
   tags = {
     Name        = "${var.vpc_name}-Private-Server-${count.index}"
@@ -26,6 +27,7 @@ resource "aws_instance" "private-server" {
      sudo systemctl start nginx
      sudo systemctl enable nginx
  EOF
+  depends_on = [var.elb_listener_public]
 }
 
 

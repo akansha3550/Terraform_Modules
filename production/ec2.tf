@@ -7,8 +7,9 @@ module "prod_ec2_1" {
   }
   aws_region      = var.aws_region
   key_name        = "myapp"
-  public_subnets  = module.prod_vpc_1.public-subnet
-  private_subnets = module.prod_vpc_1.private-subnet
+  public_subnets  = module.prod_vpc_1.public_subnets_id
+  private_subnets = module.prod_vpc_1.private_subnets_id
   sg_id           = module.prod_sg_1.sg_id
   vpc_name        = module.prod_vpc_1.vpc_name
+  natgw_id = module.prod_natgw_1.natgw_id
 }
